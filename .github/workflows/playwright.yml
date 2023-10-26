@@ -17,7 +17,7 @@ jobs:
           node-version: 18.x.x
 
       - name: Install Angular program dependencies, Angular global CLI + ng build
-        run: cd api/frontend && npm i -g @angular/cli && npm i && ng serve & echo "NG_PID=$!" >> $GITHUB_ENV
+        run: cd frontend && npm i -g @angular/cli && npm i && ng serve & echo "NG_PID=$!" >> $GITHUB_ENV
 
       - name: Build test code and install playwright test browser
         run: cd tests && sleep 60 && dotnet build && pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps

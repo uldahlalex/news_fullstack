@@ -1,21 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 using infrastructure.DataModels;
 using infrastructure.QueryModels;
 using infrastructure.Repositories;
-using infrastructure.SmtpClient;
 
 namespace service;
 
 public class ArticleService
 {
     private readonly ArticleRepository _articleRepository;
-    private readonly SmtpClient _smtpClient;
 
-    public ArticleService(ArticleRepository articleRepository, SmtpClient smtpClient)
+    public ArticleService(ArticleRepository articleRepository )
     {
         _articleRepository = articleRepository;
-        _smtpClient = smtpClient;
     }
 
     public IEnumerable<NewsFeedItem> GetArticlesForFeed()
@@ -29,9 +25,8 @@ public class ArticleService
         {
             if (_articleRepository.IsHeadlineTaken(headline))
                 throw new ValidationException("Article headline is taken");
-            var result = _articleRepository.CreateArticle(headline, body, author, articleImgUrl);
-            _smtpClient.SendEmail();
-            return result;
+            return _articleRepository.CreateArticle(headline, body, author, articleImgUrl);
+      
 
         }
         catch (ValidationException e)

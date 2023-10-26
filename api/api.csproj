@@ -12,8 +12,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
-
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0-rc.1.23421.29" />
     <PackageReference Include="Npgsql.DependencyInjection" Version="8.0.0-preview.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>

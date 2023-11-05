@@ -23,18 +23,18 @@ public class ArticleRepository
         }
     }
 
-    public IEnumerable<NewsFeedItem> GetArticlesForFeed()
+    public IEnumerable<NewsFeedItem> GetArticlesForFeed(int page, int resultsPerPage)
     {
         string sql = $@"
 SELECT articleid as {nameof(NewsFeedItem.ArticleId)},
        headline as {nameof(NewsFeedItem.Headline)},
     articleimgurl as {nameof(NewsFeedItem.ArticleImgUrl)},
     LEFT(body, 50) as  {nameof(NewsFeedItem.Body)}
-FROM news.articles;
+FROM news.articles OFFSET @offset LIMIT @limit;
 ";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.Query<NewsFeedItem>(sql);
+            return conn.Query<NewsFeedItem>(sql, new {offset = (page-1)*resultsPerPage, limit = resultsPerPage});
         }
     }
 

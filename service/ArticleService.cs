@@ -14,9 +14,9 @@ public class ArticleService
         _articleRepository = articleRepository;
     }
 
-    public IEnumerable<NewsFeedItem> GetArticlesForFeed()
+    public IEnumerable<NewsFeedItem> GetArticlesForFeed(int page, int resultsPerPage)
     {
-        return _articleRepository.GetArticlesForFeed();
+        return _articleRepository.GetArticlesForFeed(page, resultsPerPage);
     }
 
     public Article CreateArticle(string headline, string body, string articleImgUrl, string author)

@@ -21,9 +21,9 @@ public class ArticleController : ControllerBase
     
     [HttpGet]
     [Route("/api/feed")]
-    public IEnumerable<NewsFeedItem> GetFeed()
+    public IEnumerable<NewsFeedItem> GetFeed([FromQuery] int page, [FromQuery]int resultsPerPage)
     {
-        return _articleService.GetArticlesForFeed();
+        return _articleService.GetArticlesForFeed(page, resultsPerPage);
     }
 
 

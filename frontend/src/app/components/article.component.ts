@@ -36,9 +36,7 @@ import * as ago from "s-ago";
       <ion-item>Body: {{dataService.currentArticle.body}}</ion-item>
       <ion-item>ID: {{dataService.currentArticle.articleId}}</ion-item>
       <ion-item>Image URL: {{dataService.currentArticle.articleImgUrl}}</ion-item>
-      <ion-item>Date string: {{dataService.currentArticle.createdAt}}</ion-item>
-      <ion-item>Using date pipe: {{dataService.currentArticle.createdAt| date}}</ion-item>
-      <ion-item>Using luxon: {{getLocalDate(dataService.currentArticle.createdAt!)}}</ion-item>
+      <ion-item>Created {{getLocalDate(dataService.currentArticle.createdAt!)}}</ion-item>
     </ion-content>
 
 

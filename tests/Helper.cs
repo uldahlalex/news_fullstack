@@ -103,6 +103,7 @@ create table if not exists news.articles
     headline        text,
     body            text,
     author          text,
+    createdat       TIMESTAMP WITH TIME ZONE,
     articleimgurl text,
     constraint articlespk
         primary key (articleid)

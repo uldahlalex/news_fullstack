@@ -7,5 +7,6 @@ public class Article
     public int ArticleId { get; set; }
     public string ArticleImgUrl { get; set; }
     public string Author { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
 }

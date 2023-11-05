@@ -1,3 +1,4 @@
+using api.ActionFilters;
 using api.TransferModels;
 using infrastructure.DataModels;
 using infrastructure.QueryModels;
@@ -6,6 +7,7 @@ using service;
 
 namespace api.Controllers;
 
+[RateLimit(10)]
 [ApiController]
 public class ArticleController : ControllerBase
 {
@@ -16,13 +18,14 @@ public class ArticleController : ControllerBase
         _articleService = articleService;
     }
 
-
+    
     [HttpGet]
     [Route("/api/feed")]
     public IEnumerable<NewsFeedItem> GetFeed()
     {
         return _articleService.GetArticlesForFeed();
     }
+
 
     [HttpGet]
     [Route("/api/articles")]

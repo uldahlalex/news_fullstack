@@ -48,7 +48,8 @@ RETURNING articleid as {nameof(Article.ArticleId)},
     body as {nameof(Article.Body)},
        headline as {nameof(Article.Headline)},
         author as {nameof(Article.Author)},
-        articleimgurl as {nameof(Article.ArticleImgUrl)};
+        articleimgurl as {nameof(Article.ArticleImgUrl)},
+createdat as {nameof(Article.CreatedAt)};
 ";
 
         using (var conn = _dataSource.OpenConnection())
@@ -60,17 +61,18 @@ RETURNING articleid as {nameof(Article.ArticleId)},
     public Article CreateArticle(string headline, string body, string author, string articleImgUrl)
     {
         var sql = $@"
-INSERT INTO news.articles (headline, body, author, articleimgurl) 
-VALUES (@headline, @body, @author, @articleImgUrl)
+INSERT INTO news.articles (headline, body, author, articleimgurl, createdat) 
+VALUES (@headline, @body, @author, @articleImgUrl, @createdat)
 RETURNING articles.articleid as {nameof(Article.ArticleId)},
     body as {nameof(Article.Body)},
        headline as {nameof(Article.Headline)},
         author as {nameof(Article.Author)},
-        articleimgurl as {nameof(Article.ArticleImgUrl)};
+        articleimgurl as {nameof(Article.ArticleImgUrl)},
+        createdat as {nameof(Article.CreatedAt)};
 ";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<Article>(sql, new { headline, author, articleImgUrl, body });
+            return conn.QueryFirst<Article>(sql, new { headline, author, articleImgUrl, body, createdat = DateTimeOffset.UtcNow });
         }
     }
 
@@ -110,12 +112,13 @@ WHERE headline LIKE LOWER(@searchTerm) OR body LIKE LOWER(@searchTerm) LIMIT @pa
 
     }
 
-    public Article getArticleById(int articleId)
+    public Article GetArticleById(int articleId)
     {
         var sql = $@"SELECT articleid as {nameof(Article.ArticleId)},
     body as {nameof(Article.Body)},
        headline as {nameof(Article.Headline)},
         author as {nameof(Article.Author)},
+        createdat as {nameof(Article.CreatedAt)},
         articleimgurl as {nameof(Article.ArticleImgUrl)} FROM news.articles WHERE articleid = @articleId;";
         using (var conn = _dataSource.OpenConnection())
         {

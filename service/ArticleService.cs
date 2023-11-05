@@ -83,6 +83,6 @@ public class ArticleService
 
     public Article GetArticle(int articleId)
     {
-        return _articleRepository.getArticleById(articleId);
+        return _articleRepository.GetArticleById(articleId);
     }
 }

@@ -3,40 +3,43 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {firstValueFrom} from "rxjs";
 import {ModalController} from "@ionic/angular";
-import {Location} from "@angular/common";
+import {formatDate, Location} from "@angular/common";
 import {DataService} from "../data.service";
 import {environment} from "../../environments/environment";
 import {EditArticleComponent} from "./edit-article.component";
+import * as ago from "s-ago";
+
 
 @Component({
   template: `
 
-      <ion-toolbar>
-          <ion-buttons>
-              <ion-button (click)="location.back()">
-                  <ion-icon name="chevron-back-outline"></ion-icon>
-              </ion-button>
-          </ion-buttons>
-          <ion-title>
-              {{dataService.currentArticle.headline}}
-          </ion-title>
-          <ion-buttons slot="end">
-              <ion-button data-testid="open_edit" (click)="openEditModal()">
-                  <ion-icon name="cog-outline"></ion-icon>
-              </ion-button>
-          </ion-buttons>
-      </ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button (click)="location.back()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{dataService.currentArticle.headline}}
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button data-testid="open_edit" (click)="openEditModal()">
+          <ion-icon name="cog-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
 
-      <ion-content class="ion-padding" [fullscreen]="true">
+    <ion-content class="ion-padding" [fullscreen]="true">
 
-          <ion-item>Author: {{dataService.currentArticle.author}}</ion-item>
+      <ion-item>Author: {{dataService.currentArticle.author}}</ion-item>
 
-          <ion-item>Body: {{dataService.currentArticle.body}}</ion-item>
-          <ion-item>ID: {{dataService.currentArticle.articleId}}</ion-item>
-          <ion-item>Image URL: {{dataService.currentArticle.articleImgUrl}}</ion-item>
-
-
-      </ion-content>
+      <ion-item>Body: {{dataService.currentArticle.body}}</ion-item>
+      <ion-item>ID: {{dataService.currentArticle.articleId}}</ion-item>
+      <ion-item>Image URL: {{dataService.currentArticle.articleImgUrl}}</ion-item>
+      <ion-item>Date string: {{dataService.currentArticle.createdAt}}</ion-item>
+      <ion-item>Using date pipe: {{dataService.currentArticle.createdAt| date}}</ion-item>
+      <ion-item>Using luxon: {{getLocalDate(dataService.currentArticle.createdAt!)}}</ion-item>
+    </ion-content>
 
 
 
@@ -70,5 +73,10 @@ export class ArticleComponent {
       component: EditArticleComponent,
     });
     modal.present();
+  }
+
+
+   getLocalDate(UTCString: string): string {
+    return ago(new Date(UTCString));
   }
 }

@@ -5,4 +5,5 @@ export interface Article {
   articleImgUrl?: string;
   articleId?: string;
   author?: string;
+  createdAt?: string;
 }

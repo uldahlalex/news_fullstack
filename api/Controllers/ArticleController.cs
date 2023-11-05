@@ -7,7 +7,7 @@ using service;
 
 namespace api.Controllers;
 
-[RateLimit(10)]
+[RateLimit(100)]
 [ApiController]
 public class ArticleController : ControllerBase
 {

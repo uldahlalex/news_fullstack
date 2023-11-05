@@ -54,7 +54,7 @@ export class FeedComponent {
 
   }
 
-  resultsPerPage: number = 10;
+  resultsPerPage: number = 2;
   currentPage: number = 1;
 
 
@@ -67,16 +67,14 @@ export class FeedComponent {
 
   async nextPage() {
     this.currentPage = this.currentPage + 1;
-    console.log(this.currentPage)
-    await this.router.navigate(['/'], {queryParams: {page: this.currentPage}});
+    await this.router.navigate(['/'], {queryParams: {page: this.currentPage, resultsPerPage: this.resultsPerPage}});
     this.getData();
 
   }
 
   async previousPage() {
     this.currentPage = this.currentPage - 1;
-    console.log(this.currentPage)
-    await this.router.navigate(['/'], {queryParams: {page: this.currentPage}});
+    await this.router.navigate(['/'], {queryParams: {page: this.currentPage, resultsPerPage: this.resultsPerPage}});
     this.getData();
   }
 
@@ -84,6 +82,7 @@ export class FeedComponent {
   async getData() {
     const QueryParams = await firstValueFrom(this.route.queryParams);
     this.currentPage = Number.parseInt(QueryParams['page']) ?? 1;
+    this.resultsPerPage = Number.parseInt(QueryParams['resultsPerPage']) ?? 2;
     this.dataService.articles = await firstValueFrom<Article[]>(this.http.get<Article[]>(
       environment.baseUrl + "/feed?page=" + this.currentPage + "&resultsPerPage=" + this.resultsPerPage));
   }

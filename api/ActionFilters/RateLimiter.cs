@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 public class RateLimitAttribute(int requestsPerMinute) : ActionFilterAttribute
 {
-    private static readonly Dictionary<string, DateTime> Timestamps = new();
-    private static readonly Dictionary<string, int> RequestCounts = new();
+    private static readonly Dictionary<string, DateTime> Timestamps = new(); //IP and when they requested
+    private static readonly Dictionary<string, int> RequestCounts = new(); //IP and number of requests
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {

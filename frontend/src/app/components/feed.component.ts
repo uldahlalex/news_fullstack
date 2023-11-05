@@ -81,8 +81,10 @@ export class FeedComponent {
 
   async getData() {
     const QueryParams = await firstValueFrom(this.route.queryParams);
-    this.currentPage = Number.parseInt(QueryParams['page']) ?? 1;
-    this.resultsPerPage = Number.parseInt(QueryParams['resultsPerPage']) ?? 2;
+    const page = QueryParams['page'] ?? 1
+    const resultsPerPage = QueryParams['resultsPerPage'] ?? 2;
+    this.currentPage = Number.parseInt(page) ?? 1;
+    this.resultsPerPage = Number.parseInt(resultsPerPage) ?? 2;
     this.dataService.articles = await firstValueFrom<Article[]>(this.http.get<Article[]>(
       environment.baseUrl + "/feed?page=" + this.currentPage + "&resultsPerPage=" + this.resultsPerPage));
   }

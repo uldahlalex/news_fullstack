@@ -2,17 +2,15 @@ using System.Net;
 using System.Net.Http.Json;
 using Dapper;
 using FluentAssertions;
-using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using tests;
 using Tests;
 
-namespace PlaywrightTests;
+namespace apitests;
 
 [TestFixture]
-public class CreateTests : PageTest
+public class CreateTests
 {
     [TestCase("aslkdjlksadj", "Bob", "sadjsalkdj", "salkdjlsakdjskladjlk")]
     [TestCase("dfgfdgfdgfdgfdgfdgfdg", "Rob", "https://asdsajdlksadjsalkjdlksadj.com/img.png", "bla bla bla")]

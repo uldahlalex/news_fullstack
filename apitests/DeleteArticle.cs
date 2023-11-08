@@ -1,16 +1,13 @@
 using Dapper;
 using FluentAssertions;
-using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using tests;
 using Tests;
 
-namespace PlaywrightTests;
+namespace apitests;
 
 [TestFixture]
-public class DeleteTests : PageTest
+public class DeleteTests
 {
 
 

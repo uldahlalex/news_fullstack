@@ -2,16 +2,15 @@ using System.Net;
 using System.Net.Http.Json;
 using Dapper;
 using FluentAssertions;
-using Microsoft.Playwright.NUnit;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using tests;
 using Tests;
 
-namespace PlaywrightTests;
+namespace apitests;
 
 [TestFixture]
-public class UpdateTests : PageTest
+public class UpdateTests
 {
   
     //API test: Now we're not using the frontend, so we're "isolating" from the API layer and down (just using HttpClient, no Playwright)

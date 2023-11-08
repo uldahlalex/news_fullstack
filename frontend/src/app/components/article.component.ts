@@ -74,7 +74,7 @@ export class ArticleComponent {
   }
 
 
-   getLocalDate(UTCString: string): string {
+   getLocalDate(UTCString: string) {
     return ago(new Date(UTCString));
   }
 }

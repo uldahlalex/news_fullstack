@@ -75,9 +75,8 @@ export class FeedComponent {
   async previousPage() {
     this.currentPage = this.currentPage - 1;
     await this.router.navigate(['/'], {queryParams: {page: this.currentPage, resultsPerPage: this.resultsPerPage}});
-    this.getData();
+     this.getData();
   }
-
 
   async getData() {
     const QueryParams = await firstValueFrom(this.route.queryParams);

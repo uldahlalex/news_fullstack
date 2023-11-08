@@ -12,21 +12,15 @@ jobs:
         with:
           node-version: 18.x.x
 
-      - name: Install Angular program dependencies, Angular global CLI + ng build
-        run: cd frontend && npm i -g @angular/cli && npm i && ng serve & echo "NG_PID=$!" >> $GITHUB_ENV
-
-      - name: Build test code and install playwright test browser
-        run: cd tests && sleep 60 && dotnet build && pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
-
       - name: Build and run Web API + getting process ID for shutting down later
         run: cd api && dotnet run & echo "API_PID=$!" >> $GITHUB_ENV
         env:
           pgconn: ${{secrets.PGCONN}}
 
       - name: Run tests once API is running (sleep interval set to 60 seconds)
-        run: cd tests && sleep 60 && dotnet test
+        run: cd tests && sleep 60 && dotnet build && dotnet test
         env:
           pgconn: ${{secrets.PGCONN}}
           
       - name: Shutdown Web API once the tests are done running
-        run: kill $API_PID && kill $NG_PID
+        run: kill $API_PID

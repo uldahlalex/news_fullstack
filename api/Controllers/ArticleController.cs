@@ -7,7 +7,7 @@ using service;
 
 namespace api.Controllers;
 
-[RateLimit(100)]
+[RateLimit(10)]
 [ApiController]
 public class ArticleController : ControllerBase
 {
@@ -17,7 +17,6 @@ public class ArticleController : ControllerBase
     {
         _articleService = articleService;
     }
-
     
     [HttpGet]
     [Route("/api/feed")]

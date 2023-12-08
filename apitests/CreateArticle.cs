@@ -4,8 +4,7 @@ using Dapper;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using tests;
-using Tests;
+
 
 namespace apitests;
 

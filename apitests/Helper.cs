@@ -1,7 +1,7 @@
 using Dapper;
 using Npgsql;
 
-namespace Tests;
+namespace apitests;
 
 public static class Helper
 {

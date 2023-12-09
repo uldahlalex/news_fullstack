@@ -18,7 +18,7 @@ jobs:
           pgconn: ${{secrets.PGCONN}}
 
       - name: Run tests once API is running (sleep interval set to 60 seconds)
-        run: cd tests && sleep 60 && dotnet build && dotnet test
+        run: cd apitests && sleep 60 && dotnet build && dotnet test
         env:
           pgconn: ${{secrets.PGCONN}}
           
